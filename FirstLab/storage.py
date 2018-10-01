@@ -3,12 +3,28 @@ from abc import ABC, abstractmethod
 
 class StorageInterface(ABC):
 	def __init__(self, string, basetype):
+		'''
+		Initialize storage object
+		Classes that implement StorageInterface are used in Graph class to conveniently store it as list or matrix
+
+		:param string: string representing graph. Format is following:
+		N and M, Number of vertices and number of edges respectively, must be on the first line
+		Then there goes M lines, each of three integers representing one edge: ids of two vertices and edge length, OR
+		Then there goes N by N adjacency matrix, each non-zero value represents edge length and zero value means there is no edge
+		Finally, there must be N lines, with string representation of value associated with ith vertex in ith line
+		:param basetype: type of additional data appended to each vertex
+		'''
 		self.init_strings = string.split('\n')
 		self.vertices, self.edges = map(int, self.init_strings[0].split())
 		if basetype:
 			self.attached = list(map(basetype, self.init_strings[-self.vertices - 1:-1]))
 
 	def __str__(self):
+		'''
+		Convert graph to a string in specified format
+
+		:return: string
+		'''
 		return_string = str(self.vertices) + ' ' + str(self.edges) + '\n'
 		for u in range(self.vertices):
 			for v, c in self.get_adjacent(u):
@@ -20,6 +36,12 @@ class StorageInterface(ABC):
 
 	@abstractmethod
 	def get_adjacent(self, vertex):
+		'''
+		Get a list of pairs of adjacent vertices and edge lengths
+
+		:param vertex: integer
+		:return: list of pairs (adjacent vertex, edge length)
+		'''
 		pass
 
 
