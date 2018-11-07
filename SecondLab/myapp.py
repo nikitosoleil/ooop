@@ -9,6 +9,7 @@ from mytag import MyTagTree, MyTreeItem
 from mynote import MyNote
 from mylistitem import MyListItem
 from mydialog import MyDialog
+import re
 
 storage_path = "./storage.pickle"
 
@@ -91,9 +92,12 @@ class MyApp(QMainWindow, Ui_MainWindow):
 	def add_tag(self):
 		tag_name = self.tagEdit.text()
 		if tag_name:
-			my_tag = MyTagTree(uuid4(), tag_name, self.current_tag.my_tag)
-			self.current_tag.my_tag.links.append(my_tag)
-			self.current_tag.addChild(MyTreeItem(my_tag))
+			if re.match("^\w+$", tag_name):
+				my_tag = MyTagTree(uuid4(), tag_name, self.current_tag.my_tag)
+				self.current_tag.my_tag.links.append(my_tag)
+				self.current_tag.addChild(MyTreeItem(my_tag))
+			else:
+				QMessageBox.warning(self, 'Invalid', 'Invalid tag name')
 		self.tagEdit.clear()
 
 	def delete_tag(self):
