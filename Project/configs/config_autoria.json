@@ -1,0 +1,10 @@
+{
+  "experiment": "autoria_exp_1",
+  "image_width": 320,
+  "image_height": 240,
+  "image_depth": 3,
+  "num_classes": 10,
+  "batch_size": 64,
+  "num_epochs": 10,
+  "learning_rate": 0.01
+}
