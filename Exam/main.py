@@ -1,43 +1,22 @@
-import random
+import os
+
+#os.system('pyuic5 main_ui.ui -o main_ui.py')
+#os.system('pyuic5 add_product_ui.ui -o add_product_ui.py')
+#os.system('pyuic5 view_product_ui.ui -o view_product_ui.py')
+#os.system('pyuic5 add_country_ui.ui -o add_country_ui.py')
+#os.system('pyuic5 view_country_ui.ui -o view_country_ui.py')
+
+import sys
+from PyQt5.QtWidgets import *
+from app import App
 
 
-class Main:
-	def __init__(self):
-		self.products = []
-		self.countries = []
-		self.n_raw_products = 0
-		self.n_products = 0
-		self.n_countries = 0
+def main():
+	app = QApplication(sys.argv)
+	w = App()
+	w.show()
+	app.exec_()
 
 
-class Country:
-	def __init__(self, main, name):
-		self.main = main
-		self.name = name
-		self.resources = []
-		self.consuming = []
-		for _ in range(random.randint(0, self.main.n_raw_products)):
-			self.resources.append(random.randint(1, self.main.n_products))
-		for _ in range(random.randint(0, self.main.n_products)):
-			self.consuming.append(random.randint(1, self.main.n_products))
-
-
-class BaseProduct:
-	def __init__(self, main, name, id):
-		self.main = main
-		self.name = name
-		self.id = id
-
-
-class RawProduct(BaseProduct):
-	def __init__(self, main, name, id):
-		super().__init__(main, name, id)
-
-
-class Product(BaseProduct):
-	def __init__(self, main, name, id):
-		super().__init__(main, name, id)
-		self.requirements = []
-		for _ in range(self.main.n_products):
-			self.requirements.append(random.randint(1, self.main.n_products))
-		self.requirements = {i: self.requirements.count(i) for i in self.requirements}
+if __name__ == '__main__':
+	main()
