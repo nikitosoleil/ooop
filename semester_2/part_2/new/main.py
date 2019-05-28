@@ -17,8 +17,8 @@ if __name__ == '__main__':
     provider = data_factory.get_provider()
     provider.read('../cifar-10-batches-py/')
 
-    # visualizer = data_factory.get_visualizer()
-    # visualizer.visualize(provider)
+    visualizer = data_factory.get_visualizer()
+    visualizer.visualize(provider)
 
     trainer = Trainer()
     predictor = Predictor()
