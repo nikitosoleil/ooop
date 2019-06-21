@@ -74,8 +74,8 @@ class App(QMainWindow, Ui_MainWindow):
             value, time = self.structure.get(key)
             self.print_time(time)
             mb = QMessageBox()
-            mb.setWindowTitle('Result')
-            if value:
+            mb.setWindowTitle('R2esult')
+            if value is not None:
                 mb.setText(str(value))
             else:
                 mb.setText('There is no such key')
@@ -106,7 +106,7 @@ class App(QMainWindow, Ui_MainWindow):
             self.print_time(time)
             mb = QMessageBox()
             mb.setWindowTitle('Result')
-            if result:
+            if result is not None:
                 mb.setText('Yes')
             else:
                 mb.setText('No')

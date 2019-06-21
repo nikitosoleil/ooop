@@ -24,7 +24,7 @@ class Dict:
     @timeit
     def get(self, key):
         result = self.__driver.find(KeyValue(key))
-        if result:
+        if result is not None:
             return result.value
         else:
             return None
